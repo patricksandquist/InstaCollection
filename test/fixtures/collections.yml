@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: collections
+#
+#  id         :integer          not null, primary key
+#  hashtag    :text             not null
+#  start_date :integer          not null
+#  end_date   :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hashtag: MyText
+  start_date: 1
+  end_date: 1
+
+two:
+  hashtag: MyText
+  start_date: 1
+  end_date: 1

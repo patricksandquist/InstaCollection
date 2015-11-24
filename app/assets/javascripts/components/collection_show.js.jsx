@@ -17,16 +17,6 @@ window.CollectionShow = React.createClass({
   },
 
   render: function () {
-    if (this.state.collections.length !== 0) {
-      return (
-        <ul className="collection-list">
-          {this.state.collections.map(function (collection) {
-            return <li key={collection.id}>{collection.hashtag}</li>;
-          })}
-        </ul>
-      );
-    } else {
-      return <ul className="no-collections"></ul>;
-    }
+    return <div>Figure out</div>;
   }
 });

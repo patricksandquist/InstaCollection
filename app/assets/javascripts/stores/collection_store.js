@@ -33,6 +33,7 @@
           CollectionStore.emit(CHANGE_EVENT);
           break;
         case CollectionConstants.COLLECTION_ADDED:
+          debugger;
           addCollection(payload.collection);
           CollectionStore.emit(CHANGE_EVENT);
           break;

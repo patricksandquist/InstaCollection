@@ -5,7 +5,7 @@
     _submissions = submissions;
   };
 
-  var addsubmission = function (submission) {
+  var addSubmission = function (submission) {
     _submissions.push(submission);
   };
 

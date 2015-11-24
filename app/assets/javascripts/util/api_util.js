@@ -18,5 +18,16 @@ window.ApiUtil = {
         ApiActions.receiveCollection(collection);
       }
     });
+  },
+
+  fetchSubmissions: function (collectionId) {
+    $.ajax({
+      url: 'collections/' + collectionId,
+      type: 'get',
+      success: function (submissions) {
+        debugger;
+        ApiActions.receiveSubmissions(submissions);
+      }
+    });
   }
 };

@@ -16,28 +16,36 @@ window.CollectionIndex = React.createClass({
     CollectionStore.removeChangeListener(this._onChange);
   },
 
-  handleClick: function (e) {
+  handleSubmit: function (e) {
     e.preventDefault();
     this.props.history.pushState(null, 'collections/new');
+  },
+
+  handleClick: function (id, e) {
+    e.preventDefault();
+    this.props.history.pushState(null, 'collections/' + id);
   },
 
   render: function () {
     if (this.state.collections.length !== 0) {
       return (
         <div className='collection-index'>
-          <input type='submit' onClick={this.handleClick} value='New Collection'/>
-          <ul className="collection-list">
-            {this.state.collections.map(function (collection) {
-              return <li key={collection.id}>{collection.hashtag}</li>;
-            })}
-          </ul>
+          <input type='submit' onClick={this.handleSubmit} value='New Collection'/>
+          {this.state.collections.map(function (collection) {
+            return (
+              <a key={collection.id}
+                 onClick={this.handleClick.bind(this, collection.id)}>
+                {collection.hashtag}
+              </a>
+            );
+          }.bind(this))}
         </div>
       );
     } else {
       return (
         <div className='collection-index'>
           <h3>No collections to show.</h3>
-          <input type='submit' onClick={this.handleClick} value='New Collection'/>
+          <input type='submit' onClick={this.handleSubmit} value='New Collection'/>
         </div>
       );
     }

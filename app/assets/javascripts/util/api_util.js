@@ -25,7 +25,6 @@ window.ApiUtil = {
       url: 'collections/' + collectionId,
       type: 'get',
       success: function (submissions) {
-        debugger;
         ApiActions.receiveSubmissions(submissions);
       }
     });

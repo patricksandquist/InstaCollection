@@ -21,6 +21,15 @@ window.CollectionShow = React.createClass({
   },
 
   render: function () {
-    return <div>Figure out</div>;
+    return (
+      <div className='submission-list'>
+        {this.state.submissions.forEach(function (submission) {
+          return <Submission type={submission.type}
+                             link={submission.link}
+                             username={submission.username}
+                             path={submission.path}/>;
+        })}
+      </div>
+    );
   }
 });

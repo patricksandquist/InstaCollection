@@ -20,24 +20,36 @@ window.ApiUtil = {
     });
   },
 
+  fetchCollection: function (collectionId) {
+    $.ajax({
+      url: 'collections/' + collectionId,
+      type: 'get',
+      success: function (collection) {
+        ApiActions.receiveCollectionInfo(collection);
+      }
+    });
+  },
+
   fetchSubmissions: function (collectionId) {
     $.ajax({
       url: 'submissions',
-      type: 'post',
-      data: {submission: submission, },
-      success: function (collectionData) {
-        ApiActions.receiveCollectionInfo(collectionData.collection);
-        ApiActions.receiveSubmissions(collectionData.submissions);
+      type: 'get',
+      data: {collection_id: collectionId},
+      success: function (submissions) {
+        debugger;
+        ApiActions.receiveSubmissions(submissions);
       }
     });
   },
 
   loadMoreSubmissions: function (collectionData) {
+    // DONT FORGET TO DO PAGNATION
     $.ajax({
       url: "https://api.instagram.com/v1/tags/" + collectionData.hashtag + "/media/recent/?count=100&access_token=255819380.1677ed0.b38ac955d015439e8fc9878739d3f5a8",
       type: "get",
       dataType: "jsonp",
       success: function (response) {
+        debugger;
         var start = collectionData.startDate,
             end = collectionData.endDate,
             collectionId = collectionData.collectionId,
@@ -45,28 +57,29 @@ window.ApiUtil = {
 
         response.data.forEach(function (mediaItem) {
           // inRange will return the tag time if in range, false otherwise
-          var tag_time = inRange(mediaItem, collectionData.hashtag);
+          var tag_time = this.inRange(mediaItem, start, end, collectionData.hashtag);
+          debugger;
 
           if (tag_time) {
             count++;
             var submission = {
               tag_time: tag_time,
-              type: mediaItem.type,
+              media_type: mediaItem.type,
               link: mediaItem.link,
               username: mediaItem.user.username,
               image_path: mediaItem.images.standard_resolution.url,
               collection_id: collectionId
             };
 
-            saveSubmission(submission);
+            this.saveSubmission(submission);
             ApiActions.addSubmission(submission);
           }
-        });
-      }
+        }.bind(this));
+      }.bind(this)
     });
   },
 
-  inRange: function (mediaItem, hashtag) {
+  inRange: function (mediaItem, start, end, hashtag) {
     var tagTime = parseInt(mediaItem.caption.created_time);
 
     if (start < tagTime && tagTime < end) {

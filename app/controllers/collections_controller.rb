@@ -2,8 +2,7 @@ class CollectionsController < ApplicationController
   before_action :set_collection, only: [:show]
 
   def show
-    @submissions = @collection.submissions
-    render json: {collection: @collection, submissions: @submissions}
+    render json: @collection
   end
 
   def create

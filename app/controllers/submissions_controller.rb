@@ -1,4 +1,9 @@
 class SubmissionsController < ApplicationController
+  def index
+    @submissions = Submission.where("collection_id = ?", params[:collection_id].to_i)
+    render json: @submissions
+  end
+
   def create
     @submission = Submission.new(collection_params)
 

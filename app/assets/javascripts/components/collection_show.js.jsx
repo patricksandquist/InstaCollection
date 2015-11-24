@@ -25,6 +25,7 @@ window.CollectionShow = React.createClass({
     // Add listeners and grab the submissions
     CollectionStore.addChangeListener(this._onCollectionChange);
     SubmissionStore.addChangeListener(this._onSubmissionChange);
+    ApiUtil.fetchCollection(this.state.collectionId);
     ApiUtil.fetchSubmissions(this.state.collectionId);
   },
 

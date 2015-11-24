@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  tag_time      :integer          not null
-#  type          :text             not null
+#  media_type    :text             not null
 #  link          :text             not null
 #  username      :string           not null
 #  image_path    :text             not null

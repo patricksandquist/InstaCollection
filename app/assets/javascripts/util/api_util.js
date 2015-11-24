@@ -58,7 +58,6 @@ window.ApiUtil = {
         response.data.forEach(function (mediaItem) {
           // inRange will return the tag time if in range, false otherwise
           var tag_time = this.inRange(mediaItem, start, end, collectionData.hashtag);
-          debugger;
 
           if (tag_time) {
             count++;
@@ -101,15 +100,14 @@ window.ApiUtil = {
     return false;
   },
 
-  saveSubmission: function (submission, collectionId) {
+  saveSubmission: function (submission) {
     $.ajax({
       url: 'submissions',
       type: 'post',
       data: {submission: submission},
-      success: function (collectionData) {
-        ApiActions.receiveCollectionInfo(collectionData.collection);
-        ApiActions.receiveSubmissions(collectionData.submissions);
-      }
+      success: function (savedSubmission) {
+        this.fetchSubmissions(savedSubmission.collection_id);
+      }.bind(this)
     });
   }
 };

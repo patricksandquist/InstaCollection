@@ -5,18 +5,18 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    @submission = Submission.new(collection_params)
+    @submission = Submission.new(submission_params)
 
-    if @collection.save
-      render json: @collection
+    if @submission.save
+      render json: @submission
     else
-      render json: @collection.errors, status: :unprocessable_entity
+      render json: @submission.errors, status: :unprocessable_entity
     end
   end
 
   private
-    def collection_params
+    def submission_params
       params.require(:submission)
-            .permit(:tag_time, :type, :link, :username, :image_path, :collection_id)
+            .permit(:tag_time, :media_type, :link, :username, :image_path, :collection_id)
     end
 end

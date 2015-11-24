@@ -18,5 +18,12 @@ window.ApiActions = {
       actionType: SubmissionConstants.SUBMISSIONS_RECEIVED,
       submissions: submissions
     });
+  },
+
+  receiveCollectionInfo: function (collectionInfo) {
+    AppDispatcher.dispatch({
+      actionType: CollectionConstants.COLLECTION_UPDATED,
+      collectionInfo: collectionInfo
+    });
   }
 };

@@ -3,7 +3,7 @@ class CollectionsController < ApplicationController
 
   def show
     @submissions = @collection.submissions
-    render json: @submissions
+    render json: {collection: @collection, submissions: @submissions}
   end
 
   def create

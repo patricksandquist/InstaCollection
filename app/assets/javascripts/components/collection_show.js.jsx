@@ -4,7 +4,7 @@ window.CollectionShow = React.createClass({
   },
 
   getInitialState: function () {
-    return { collections: CollectionStore.all() };
+    return { submissions: SubmissionStore.all() };
   },
 
   componentDidMount: function () {

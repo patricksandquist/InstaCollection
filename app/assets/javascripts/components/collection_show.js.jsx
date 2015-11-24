@@ -35,6 +35,7 @@ window.CollectionShow = React.createClass({
   handleLoad: function (e) {
     e.preventDefault();
     var collectionData = {
+      collectionId: this.state.collectionId,
       hashtag: this.state.hashtag,
       startDate: this.state.startDate,
       endDate: this.state.endDate

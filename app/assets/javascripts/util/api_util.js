@@ -24,6 +24,7 @@ window.ApiUtil = {
     $.ajax({
       url: 'submissions',
       type: 'post',
+      data: {submission: submission, },
       success: function (collectionData) {
         ApiActions.receiveCollectionInfo(collectionData.collection);
         ApiActions.receiveSubmissions(collectionData.submissions);
@@ -39,6 +40,7 @@ window.ApiUtil = {
       success: function (response) {
         var start = collectionData.startDate,
             end = collectionData.endDate,
+            collectionId = collectionData.collectionId,
             count = 0;
 
         response.data.forEach(function (mediaItem) {
@@ -52,7 +54,8 @@ window.ApiUtil = {
               type: mediaItem.type,
               link: mediaItem.link,
               username: mediaItem.user.username,
-              image_path: mediaItem.images.standard_resolution.url
+              image_path: mediaItem.images.standard_resolution.url,
+              collection_id: collectionId
             };
 
             saveSubmission(submission);
@@ -85,10 +88,11 @@ window.ApiUtil = {
     return false;
   },
 
-  saveSubmission: function (submission) {
+  saveSubmission: function (submission, collectionId) {
     $.ajax({
       url: 'submissions',
       type: 'post',
+      data: {submission: submission},
       success: function (collectionData) {
         ApiActions.receiveCollectionInfo(collectionData.collection);
         ApiActions.receiveSubmissions(collectionData.submissions);

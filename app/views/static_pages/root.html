@@ -1,6 +1,18 @@
-<div id="content">
-  Welcome to InstaCollections, click the link to sign into Instagram.
-  <a href="/oauth/connect">Connect with Instagram</a>
-  <!-- <a href="https://api.instagram.com/oauth/authorize/?client_id=6389ccac58e646fda132c48c1e3fa31c&redirect_uri=http://insta-collection.herokuapp.com/collections/ -->
-<!-- &response_type=code">Click me!</a> -->
+<div class="content">
+  Welcome to InstaCollections!
+  <script type="text/javascript">
+    $.ajax({
+      type: "GET",
+      dataType: "jsonp",
+      url: "https://api.instagram.com/v1/tags/sf/media/recent/?count=100&access_token=255819380.1677ed0.b38ac955d015439e8fc9878739d3f5a8",
+      success: function(response) {
+        response.data.forEach(function (mediaItem) {
+          $(".content").append("\
+            <div class='instagram-feed'>\
+              <img class='instagram-image' src='" + mediaItem.images.standard_resolution.url +"' width='325px'/>\
+            </div>");
+        })
+      }
+    });
+  </script>
 </div>

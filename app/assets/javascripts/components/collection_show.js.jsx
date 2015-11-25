@@ -57,6 +57,7 @@ window.CollectionShow = React.createClass({
   componentWillUnmount: function () {
     CollectionStore.removeChangeListener(this._onCollectionChange);
     SubmissionStore.removeChangeListener(this._onSubmissionChange);
+    this.setState({ autoloaded: false });
   },
 
   autoLoad: function () {

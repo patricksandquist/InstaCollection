@@ -44,9 +44,27 @@ window.CollectionShow = React.createClass({
     ApiUtil.fetchSubmissions(this.state.collectionId);
   },
 
+  componentDidUpdate: function () {
+    if (this.state.submissions.length === 0) {
+      // Autoload the first set of images
+      this.autoLoad();
+    }
+  },
+
   componentWillUnmount: function () {
     CollectionStore.removeChangeListener(this._onCollectionChange);
     SubmissionStore.removeChangeListener(this._onSubmissionChange);
+  },
+
+  autoLoad: function () {
+    var collectionData = {
+      collectionId: this.state.collectionId,
+      hashtag: this.state.hashtag,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      submissionLinks: this._submissionLinks()
+    };
+    ApiUtil.loadMoreSubmissions(collectionData);
   },
 
   handleLoad: function (e) {
@@ -73,6 +91,10 @@ window.CollectionShow = React.createClass({
           {this._formatDate(this.state.startDate)} -
           {this._formatDate(this.state.endDate)}
         </h2>
+        <br></br>
+        <input type='submit' onClick={this.handleLoad} value='Load More'/>
+        <input type='submit' onClick={this.handleCancel} value='Back'/>
+        <br></br>
         { this.state.submissions.map(function (submission) {
           return <Submission key={submission.id}
                              media_type={submission.media_type}
@@ -80,6 +102,7 @@ window.CollectionShow = React.createClass({
                              username={submission.username}
                              image_path={submission.image_path}/>;
         })}
+        <br></br>
         <input type='submit' onClick={this.handleLoad} value='Load More'/>
         <input type='submit' onClick={this.handleCancel} value='Back'/>
       </div>

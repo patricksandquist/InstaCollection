@@ -85,6 +85,11 @@ window.ApiUtil = {
                 collection_id: collectionId
               };
 
+              if (submission.media_type === 'video') {
+                // Grab the mp4 path for videos
+                submission.image_path = mediaItem.videos.standard_resolution.url;
+              }
+
               this.saveSubmission(submission);
               ApiActions.addSubmission(submission);
               collectionData.submissionLinks.push(submission.link);

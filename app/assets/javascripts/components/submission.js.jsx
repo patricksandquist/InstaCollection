@@ -15,11 +15,12 @@ window.Submission = React.createClass({
       // video
       return (
         <div className='submission-item'>
-          <img className='video'
-               src={this.props.image_path}
-               width='325px'/>
+          <video className='video'
+                 controls
+                 src={this.props.image_path}
+                 width='325px'/>
           <br></br>
-          <a className='link' href={this.props.link}>Photo</a> by {this.props.username}
+          <a className='link' href={this.props.link}>Video</a> by {this.props.username}
           <br></br>
         </div>
       );

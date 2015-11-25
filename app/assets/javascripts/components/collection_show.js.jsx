@@ -11,9 +11,12 @@ window.CollectionShow = React.createClass({
       endDate: CollectionStore.endDate()
     });
     window.setTimeout(function () {
-      if (this.state.submissions.length === 0 && this.state.hashtag !== "") {
+      if (this.state.submissions.length === 0 &&
+          this.state.hashtag !== "" &&
+          !this.state.autoloaded) {
         // Autoload the first set of images
         this.autoLoad();
+        this.setState({ autoloaded: true });
       }
     }.bind(this), 200);
   },
@@ -38,7 +41,8 @@ window.CollectionShow = React.createClass({
       hashtag: '',
       startDate: 0,
       endDate: 0,
-      submissions: []
+      submissions: [],
+      autoloaded: false
     };
   },
 

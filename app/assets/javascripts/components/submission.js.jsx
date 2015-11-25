@@ -6,7 +6,9 @@ window.Submission = React.createClass({
       return (
         <div className='submission-item'>
           <img className='photo' src={this.props.image_path} width='325px'/>
+          <br></br>
           <a className='link' href={this.props.link}>Photo</a> by {this.props.username}
+          <br></br>
         </div>
       );
     } else {
@@ -16,7 +18,9 @@ window.Submission = React.createClass({
           <img className='video'
                src={this.props.image_path}
                width='325px'/>
+          <br></br>
           <a className='link' href={this.props.link}>Photo</a> by {this.props.username}
+          <br></br>
         </div>
       );
     }

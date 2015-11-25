@@ -41,18 +41,30 @@ window.ApiUtil = {
     });
   },
 
-  loadMoreSubmissions: function (collectionData) {
-    // DONT FORGET TO DO PAGNATION
+  loadMoreSubmissions: function (collectionData, count, min_tag_id) {
+    debugger;
+    if (typeof count === 'undefined') {
+      count = 0;
+    }
+    var nextUrl, newestDate, oldestDate;
+    if (typeof min_tag_id === 'undefined') {
+      nextUrl = "https://api.instagram.com/v1/tags/" + collectionData.hashtag + "/media/recent/?count=20&access_token=255819380.1677ed0.b38ac955d015439e8fc9878739d3f5a8";
+    } else {
+      nextUrl = "https://api.instagram.com/v1/tags/" + collectionData.hashtag + "/media/recent/?count=20&min_tag_id=" + min_tag_id + "&access_token=255819380.1677ed0.b38ac955d015439e8fc9878739d3f5a8";
+    }
+
     $.ajax({
-      url: "https://api.instagram.com/v1/tags/" + collectionData.hashtag + "/media/recent/?count=100&access_token=255819380.1677ed0.b38ac955d015439e8fc9878739d3f5a8",
+      url: nextUrl,
       type: "get",
       dataType: "jsonp",
       success: function (response) {
+        min_tag_id = parseInt(response.pagination.min_tag_id);
+        oldestDate = parseInt(response.data[response.data.length - 1].created_time);
         debugger;
+
         var start = collectionData.startDate,
             end = collectionData.endDate,
-            collectionId = collectionData.collectionId,
-            count = 0;
+            collectionId = collectionData.collectionId;
 
         response.data.forEach(function (mediaItem) {
           // inRange will return the tag time if in range, false otherwise
@@ -74,7 +86,12 @@ window.ApiUtil = {
           }
         }.bind(this));
 
-        this.fetchSubmissions(collectionId);
+        if (count < 20 && collectionData.endDate < oldestDate) {
+          debugger;
+          this.loadMoreSubmissions(collectionData, count, min_tag_id);
+        } else {
+          this.fetchSubmissions(collectionId);
+        }
       }.bind(this)
     });
   },

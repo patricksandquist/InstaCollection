@@ -15,6 +15,11 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def index
+    @collections = Collection.all
+    render json: @collections
+  end
+
   private
     def set_collection
       @collection = Collection.find(params[:id])

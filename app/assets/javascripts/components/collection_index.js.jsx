@@ -10,6 +10,7 @@ window.CollectionIndex = React.createClass({
   componentDidMount: function () {
     // Add a listener and grab the collections
     CollectionStore.addChangeListener(this._onChange);
+    ApiUtil.fetchCollections();
   },
 
   componentWillUnmount: function () {
@@ -33,10 +34,10 @@ window.CollectionIndex = React.createClass({
           <input type='submit' onClick={this.handleSubmit} value='New Collection'/>
           {this.state.collections.map(function (collection) {
             return (
-              <a key={collection.id}
+              <h2 key={collection.id}
                  onClick={this.handleClick.bind(this, collection.id)}>
                 {collection.hashtag}
-              </a>
+              </h2>
             );
           }.bind(this))}
         </div>

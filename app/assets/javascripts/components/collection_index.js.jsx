@@ -1,6 +1,11 @@
 window.CollectionIndex = React.createClass({
   _onChange: function () {
+    var count = this.state.collections.length;
     this.setState({ collections: CollectionStore.all() });
+    if (this.state.collections.length === count + 1) {
+      var id = this.state.collections[count].id;
+      this.props.history.pushState(null, 'collections/' + id);
+    }
   },
 
   getInitialState: function () {

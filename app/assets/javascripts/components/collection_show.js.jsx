@@ -10,6 +10,12 @@ window.CollectionShow = React.createClass({
       startDate: CollectionStore.startDate(),
       endDate: CollectionStore.endDate()
     });
+    window.setTimeout(function () {
+      if (this.state.submissions.length === 0 && this.state.hashtag !== "") {
+        // Autoload the first set of images
+        this.autoLoad();
+      }
+    }.bind(this), 200);
   },
 
   _submissionLinks: function () {
@@ -42,13 +48,6 @@ window.CollectionShow = React.createClass({
     SubmissionStore.addChangeListener(this._onSubmissionChange);
     ApiUtil.fetchCollection(this.state.collectionId);
     ApiUtil.fetchSubmissions(this.state.collectionId);
-  },
-
-  componentDidUpdate: function () {
-    if (this.state.submissions.length === 0) {
-      // Autoload the first set of images
-      this.autoLoad();
-    }
   },
 
   componentWillUnmount: function () {

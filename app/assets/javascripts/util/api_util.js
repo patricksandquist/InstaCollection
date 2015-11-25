@@ -112,7 +112,7 @@ window.ApiUtil = {
     var seen = collectionData.submissionLinks;
 
     if (start < tagTime && tagTime < end && seen.indexOf(mediaItem.link) === -1) {
-      return mediaItem.caption.created_time;
+      return tagTime;
     } else {
       // check the comments for the hashtag
       for (var i = 0; i < mediaItem.comments.data.length; i++) {

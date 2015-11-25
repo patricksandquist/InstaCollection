@@ -12,6 +12,12 @@ window.CollectionShow = React.createClass({
     });
   },
 
+  _submissionLinks: function () {
+    return this.state.submissions.map(function (submission) {
+      return submission.link;
+    });
+  },
+
   getInitialState: function () {
     return {
       collectionId: this.props.params.collectionId,
@@ -41,7 +47,8 @@ window.CollectionShow = React.createClass({
       collectionId: this.state.collectionId,
       hashtag: this.state.hashtag,
       startDate: this.state.startDate,
-      endDate: this.state.endDate
+      endDate: this.state.endDate,
+      submissionLinks: this._submissionLinks()
     };
     ApiUtil.loadMoreSubmissions(collectionData);
   },

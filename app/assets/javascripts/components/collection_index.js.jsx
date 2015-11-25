@@ -35,7 +35,8 @@ window.CollectionIndex = React.createClass({
           {this.state.collections.map(function (collection) {
             return (
               <h2 key={collection.id}
-                 onClick={this.handleClick.bind(this, collection.id)}>
+                  className='collection-item'
+                  onClick={this.handleClick.bind(this, collection.id)}>
                 {collection.hashtag}
               </h2>
             );

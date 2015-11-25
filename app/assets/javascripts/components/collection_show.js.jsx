@@ -1,6 +1,7 @@
 window.CollectionShow = React.createClass({
   _onSubmissionChange: function () {
     this.setState({ submissions: SubmissionStore.all() });
+    this.forceUpdate();
   },
 
   _onCollectionChange: function () {
@@ -30,7 +31,8 @@ window.CollectionShow = React.createClass({
   },
 
   componentWillUnmount: function () {
-    CollectionStore.removeChangeListener(this._onChange);
+    CollectionStore.removeChangeListener(this._onCollectionChange);
+    SubmissionStore.removeChangeListener(this._onSubmissionChange);
   },
 
   handleLoad: function (e) {
@@ -48,11 +50,12 @@ window.CollectionShow = React.createClass({
     return (
       <div className='submission-list'>
         <h2>{this.state.hashtag}</h2>
-        {this.state.submissions.forEach(function (submission) {
-          return <Submission type={submission.type}
+        { this.state.submissions.map(function (submission) {
+          return <Submission key={submission.id}
+                             media_type={submission.media_type}
                              link={submission.link}
                              username={submission.username}
-                             path={submission.path}/>;
+                             image_path={submission.image_path}/>;
         })}
         <input type='submit' onClick={this.handleLoad} value='Load More'/>
       </div>

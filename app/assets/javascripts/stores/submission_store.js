@@ -2,7 +2,6 @@
   var _submissions = [], CHANGE_EVENT = 'change';
 
   var resetSubmissions = function (submissions) {
-    debugger;
     _submissions = submissions;
   };
 

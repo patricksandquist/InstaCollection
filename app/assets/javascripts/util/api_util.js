@@ -36,7 +36,6 @@ window.ApiUtil = {
       type: 'get',
       data: {collection_id: collectionId},
       success: function (submissions) {
-        debugger;
         ApiActions.receiveSubmissions(submissions);
       }
     });
@@ -74,6 +73,8 @@ window.ApiUtil = {
             ApiActions.addSubmission(submission);
           }
         }.bind(this));
+
+        this.fetchSubmissions(collectionId);
       }.bind(this)
     });
   },
@@ -106,7 +107,7 @@ window.ApiUtil = {
       type: 'post',
       data: {submission: submission},
       success: function (savedSubmission) {
-        this.fetchSubmissions(savedSubmission.collection_id);
+        //this.fetchSubmissions(savedSubmission.collection_id);
       }.bind(this)
     });
   }

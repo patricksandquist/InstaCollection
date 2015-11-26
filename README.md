@@ -1,4 +1,7 @@
 # InstaCollections
+[Live site][liveLink]
+[liveLink]: http://insta-collection.herokuapp.com
+
 InstaCollections is a webapp for making Instagram collections by tag and date range. It is built using Ruby on Rails, React.js, and a Postgresql server.
 
 ## Features

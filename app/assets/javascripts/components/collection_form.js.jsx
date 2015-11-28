@@ -3,8 +3,13 @@ window.CollectionForm = React.createClass({
     e.preventDefault();
 
     // Capture the fields and convert the date to a Unix Timestamp
+    var formHashtag = e.target[0].value;
+    if (formHasgtag[0] === '#') {
+      // remove the '#'
+      formHashtag = formHashtag.slice(1)
+    }
     var inputCollection = {
-      hashtag: e.target[0].value,
+      hashtag: formHashtag,
       start_date: Date.parse(e.target[1].value)/1000,
       end_date: Date.parse(e.target[2].value)/1000,
     };

@@ -4,9 +4,9 @@ window.CollectionForm = React.createClass({
 
     // Capture the fields and convert the date to a Unix Timestamp
     var formHashtag = e.target[0].value;
-    if (formHasgtag[0] === '#') {
+    if (formHashtag[0] === '#') {
       // remove the '#'
-      formHashtag = formHashtag.slice(1)
+      formHashtag = formHashtag.slice(1);
     }
     var inputCollection = {
       hashtag: formHashtag,

@@ -20,7 +20,7 @@ window.CollectionForm = React.createClass({
   render: function () {
     return (
       <div>
-        <h2>Make a new collection by providing a hashtag and date range</h2>
+        <h2>Make a new collection by providing a hashtag (no need to include the '#') and date range</h2>
         <form action="" onSubmit={this.handleSubmit}>
           Hashtag:    <input id='hashtag' type='text'/><br></br>
           Start Date: <input id='start-date' type='date'/><br></br>

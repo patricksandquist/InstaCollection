@@ -12,7 +12,7 @@ Instacollections is a webapp for making Instagram collections by tag and date ra
 - Each collection is autopopulated, but users may load more media.
 
 ## Todo
-- Improve the frontend styling.
+- Include message when no media is returned from Instagram for the given range
 - Allow users to search through existing collections
 - Make collection dates adjustable
 - Start making API calls within date range (need a way of converting date to Instagram tag_id number).
